@@ -10,8 +10,10 @@ import "firebase/auth";
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
     appId: process.env.REACT_APP_APP_ID
   };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
 
-  export const authService = firebase.auth();
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+export const fireBaseInstance = firebase;
+export const authService = firebase.auth();
 
