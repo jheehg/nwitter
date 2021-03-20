@@ -12,7 +12,7 @@ const Home = ({userObj}) => {
             const nweetArray = snapshot.docs.map((doc) =>
              ({ id: doc.id,
                 ...doc.data()})
-            );
+            )
             setNweets(nweetArray);
         });
     }, []);
