@@ -15,6 +15,9 @@ function App() {
         updateProfile: (args)=> user.updateProfile(args), 
         // to execute real function in Profile component
       });
+    } else {
+      // profile에서 signout시 화면처리
+      setUserObj(null);
     }
     setInit(true);
     });
