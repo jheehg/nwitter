@@ -12,7 +12,7 @@ const NweetFacotry = ({ userObj }) => {
         event.preventDefault();
         if(nweet === "") return;
         let attachmentUrl = "";
-        if(attachment !== "") {
+        if(attachment !== "" && attachment !== null) {
             const attachmentRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
             const response = await attachmentRef.putString(attachment, "data_url");
             attachmentUrl = await response.ref.getDownloadURL();

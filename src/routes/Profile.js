@@ -1,22 +1,29 @@
 import { authService, dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import Nweet from "components/Nweet";
 
 export default ({ refreshUser, userObj }) => {
     const history = useHistory();
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
     // displayName은 createUserWithEmailAndPassword로 가입 시 초기값 null
+    const [myNweets, setMyNweets] = useState([]);
 
     const onLogOutClick = ()=> {
         authService.signOut();
         history.push("/");
     }
-    const getMyNweets = async() => {
-        const nweets = await dbService.collection("nweets")
+    const getMyNweets = async () => {
+         await dbService.collection("nweets")
         .where("creatorId", "==", userObj.uid)
-        .orderBy("createdAt")
-        .get();
-        console.log(nweets.docs.map(doc => doc.data()));
+        .orderBy("createdAt", "desc")
+        .onSnapshot(snapshot => {
+            const myNweetArray = snapshot.docs.map((doc) =>
+             ({ id: doc.id,
+                ...doc.data()})
+            )
+            setMyNweets(myNweetArray);
+        });
     }
 
     useEffect(()=> {
@@ -58,8 +65,13 @@ export default ({ refreshUser, userObj }) => {
                     style={{
                     marginTop: 10,
                     }} />
-    
             </form>
+            <div style={{ marginTop: 30 }}>
+                {myNweets.map((nweetData) => 
+                 <Nweet key={nweetData.id} 
+                        nweetObj={nweetData} 
+                        isOwner={nweetData.creatorId === userObj.uid } />)}
+            </div>
             <span className="formBtn cancelBtn logOut" onClick={onLogOutClick}>
                 Log Out
             </span>
