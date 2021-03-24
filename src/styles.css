@@ -45,7 +45,6 @@ form {
 }
 
 .formInput {
-  width: 100%;
   padding: 10px 20px;
   border-radius: 20px;
   border: 1px solid black;
@@ -124,6 +123,7 @@ form {
   text-align: center;
   border-radius: 20px;
   color: white;
+  cursor: pointer;
 }
 
 .factoryInput__label {
