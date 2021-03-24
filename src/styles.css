@@ -55,7 +55,6 @@ form {
 
 .formBtn {
   cursor: pointer;
-  width: 100%;
   padding: 7px 20px;
   text-align: center;
   color: white;
@@ -119,7 +118,6 @@ form {
   background-color: #04aaff;
   height: 40px;
   width: 40px;
-  padding: 10px 0px;
   text-align: center;
   border-radius: 20px;
   color: white;
